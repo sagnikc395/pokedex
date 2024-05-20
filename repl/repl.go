@@ -19,6 +19,8 @@ Welcome to the Pokedex!
 Usage:
 
 help:  Displays a help message
+map:   Displays the names of 20 location areas in the Pokemon world.
+mapb:  Displays the names of the 20 previous location areas in the Pokemon world.
 exit:  Exit the Pokedex`)
 	return nil
 }
