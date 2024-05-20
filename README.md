@@ -1,4 +1,3 @@
-## chirpy 
+## pokedex
 
-chirpy is a social network made as part of twitter.
-
+CLI programming course project made on boot.dev.
