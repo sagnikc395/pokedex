@@ -1,17 +1,9 @@
 package main
 
-import "fmt"
-
-type cliCommand struct {
-	name        string
-	description string
-	callback    func() error
-}
+import (
+	"github.com/sagnikc395/pokedex/repl"
+)
 
 func main() {
-	var input string
-	for {
-		fmt.Scanf("%s", &input)
-
-	}
+	repl.StartRepl()
 }
