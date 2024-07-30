@@ -1,35 +1,62 @@
-package main 
+package main
 
-import "fmt"
-import "bufio"
-import "os"
+import (
+	"bufio"
+	"fmt"
+	"log"
+	"os"
+)
 
-
-type CommandType struct {
-  name string 
-  descp string 
-  callback func() error 
+type Command struct {
+	Name     string
+	Descp    string
+	Callback func() error
 }
 
-const cmds := map[string]CommandType{
-  "help": {
-    name: "help",
-    descp: "displays a help message",
-    callback: cmdHelp,
-  },
-  "exit": {
-    name: "exit",
-    descp: "Exit the Pokedex",
-    callback: cmdExit,
-  }
+func commandHelp() error {
+	fmt.Printf("\nWelcom to the Pokedex!\nUsage:\n\nhelp: Displays a help message\nexit: Exit the Pokedex\n")
+	return nil
 }
 
+func commandExit() error {
+	os.Exit(0)
+	return nil
+}
 
+func main() {
+	var prompt string = "pokedex > "
+	scanner := bufio.NewScanner(os.Stdin)
 
-func main(){
-  scanner := bufio.NewScanner(os.Stdin)
+	commands := map[string]Command{
+		"help": {
+			Name:     "help",
+			Descp:    "Displays a help message",
+			Callback: commandHelp,
+		},
+		"exit": {
+			Name:     "exit",
+			Descp:    "Exit the Pokedex",
+			Callback: commandExit,
+		},
+	}
 
-  for ;; {
-  
-  }
+	for {
+		fmt.Printf(prompt)
+		if !scanner.Scan() {
+			if err := scanner.Err(); err != nil {
+				log.Fatal(err)
+			}
+			break
+		}
+
+		cmd := scanner.Text()
+		k, status := commands[cmd]
+		if status == false {
+			fmt.Printf("command not found")
+		}
+		err := k.Callback()
+		if err != nil {
+			log.Fatal(err)
+		}
+	}
 }
