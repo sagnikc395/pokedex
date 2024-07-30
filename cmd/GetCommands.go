@@ -12,5 +12,10 @@ func GetCommands() map[string]Command {
 			Descp:    "Exit the Pokedex",
 			Callback: CommandExit,
 		},
+		"map": {
+			Name:     "map",
+			Descp:    "list locations",
+			Callback: CommandMakeAPIRequest,
+		},
 	}
 }
